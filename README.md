@@ -20,7 +20,7 @@ tokenizer = TweetTokenizer()
 text = "I'm happy that you're here."
 words = tokenizer.tokenize(text)
 print(words)
-
+```
 ## Clitic Contraction Expansion
 
 Clitic contractions like "I'm" or "you're" are expanded into their full forms, such as "I am" or "you are". The `expand_contractions_clitic` function takes a text as input and returns the expanded text.
@@ -57,3 +57,4 @@ def expand_contractions_clitic(text):
 text = "I'm happy that you're here. can't and you're he's she's "
 expanded_text = expand_contractions_clitic(text)
 print("Expand Clitic:", expanded_text)
+```
