@@ -58,3 +58,83 @@ text = "I'm happy that you're here. can't and you're he's she's "
 expanded_text = expand_contractions_clitic(text)
 print("Expand Clitic:", expanded_text)
 ```
+## Lemmatization
+
+Lemmatization reduces words to their base or dictionary form. The `lemmatizing` function uses spaCy's English language model to lemmatize a given text.
+
+```python
+import spacy
+
+def lemmatizing(text):
+    nlp = spacy.load("en_core_web_sm")
+
+    doc = nlp(text)
+    lemmas = [token.lemma_ for token in doc]
+
+    return lemmas
+
+examplelemma = "am is are was were"
+print(lemmatizing(examplelemma))
+```
+## Multi-Word Tokenization
+
+If you want to treat multi-word entities like "New York" as a single token, you can use phrase tokenization. One way to achieve this is by using the `MWETokenizer` class from NLTK.
+
+```python
+from nltk.tokenize import MWETokenizer
+
+def tokenizing_multiword(text):
+    tokenizer = MWETokenizer([('New', 'York'), ('Alice', 'Springs')], separator=' ')
+    tokens = tokenizer.tokenize(text.split())
+    return tokens
+
+sentence = "I'm going to New York tomorrow. Alice Springs, can't"
+text = tokenizing_multiword(sentence)
+print("Multi-word Tokenization:", expand_contractions_clitic(str(text)))
+```
+
+## Stemming
+
+Stemming is the process of reducing words to their root or stem form. In this code snippet, stemming is demonstrated using the Snowball stemmer and Porter stemmer from NLTK.
+
+```python
+from nltk.stem import SnowballStemmer, PorterStemmer
+
+def stemming(text):
+    ps = PorterStemmer()
+    ss = SnowballStemmer("english")
+    SnowballStemmerlist = []
+    PorterStemmerlist = []
+    for w in text:
+        word = ss.stem(w)
+        SnowballStemmerlist.append(word)
+        word2 = ps.stem(w)
+        PorterStemmerlist.append(word2)
+
+    return SnowballStemmerlist, PorterStemmerlist
+
+examplewords = ["python", "pythoned", "pythoning", "pythoned", "pythonly"]
+SnowballStemmerlist, PorterStemmerlist = stemming(examplewords)
+print("SnowballStemmerlist:", SnowballStemmerlist)
+print("PorterStemmerlist:", PorterStemmerlist)
+```
+
+## Stop Word Filtering
+
+Stop word filtering involves removing commonly used words, known as stop words, from the text. NLTK provides a list of stop words for various languages. Here's an example of how to perform stop word filtering using NLTK.
+
+```python
+from nltk.corpus import stopwords
+from nltk.tokenize import word_tokenize
+
+def tokenize_and_stop_word_filteration(text):
+    stop_words = set(stopwords.words("english"))
+    tokenize_words = word_tokenize(text)
+    filtered_sentence = [w for w in tokenize_words if not w in stop_words]
+    return tokenize_words, filtered_sentence
+
+stopword_text = "This is an example of showing off stop word filtering"
+tokenz, filterations = tokenize_and_stop_word_filteration(stopword_text)
+print("Word Tokenization:", tokenz)
+print("Stop Word Filtering:", filterations)
+
